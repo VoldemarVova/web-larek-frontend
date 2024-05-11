@@ -2,16 +2,16 @@ import './scss/styles.scss';
 
 import { LarekAPI } from "./components/LarekAPI";
 import { API_URL, CDN_URL } from "./utils/constants";
-import { EventEmitter } from './components/base/events';
+import { EventEmitter } from './components/base/Events';
 import { AppData, CardItem, CatalogChangeEvent } from "./components/AppData";
 import { Page } from "./components/Page";
 import { Card } from './components/Card';
 import { cloneTemplate, createElement, ensureElement } from "./utils/utils";
 import { Modal } from "./components/common/Modal";
-import { Basket } from './components/common/Basket';
+import { Basket } from './components/Basket';
 import { IOrderForm } from './types';
-import { Order } from "./components/Order";
-import { Success } from './components/common/Success';
+import { OrderForm } from "./components/Order";
+import { Success } from './components/Success';
 
 const events = new EventEmitter();
 const api = new LarekAPI(CDN_URL, API_URL);
@@ -39,8 +39,8 @@ const modal = new Modal(ensureElement<HTMLElement>('#modal-container'), events)
 
 // Переиспользуемые части интерфейса
 const basket = new Basket(cloneTemplate(basketTemplate), events)
-const order = new Order(cloneTemplate(orderTemplate), events)
-const contacts = new Order(cloneTemplate(contactsTemplate), events)
+const order = new OrderForm(cloneTemplate(orderTemplate), events)
+const contacts = new OrderForm(cloneTemplate(contactsTemplate), events)
 
 // Дальше идет бизнес-логика
 // Поймали событие, сделали что нужно
@@ -66,7 +66,7 @@ events.on('card:select', (item: CardItem) => {
 events.on('preview:changed', (item: CardItem) => {
 	const showItem = (item: CardItem) => {
 		const card = new Card('card', cloneTemplate(cardPreviewTemplate), {
-				onSubmit: () => {
+				onSend: () => {
 					appData.setBasket(item)
 					page.counter = appData.basket.length
 					card.setButtonOff(true)
@@ -74,7 +74,7 @@ events.on('preview:changed', (item: CardItem) => {
 			}
 		)
 		if (item.price === null) {
-			card.setButtonOff(true)
+			card.setButtonOff(null)
 		}
 		if (appData.isInBasket(item)) {
 			card.setButtonOff(true)

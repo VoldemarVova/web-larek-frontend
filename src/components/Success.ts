@@ -1,5 +1,5 @@
-import {View} from '../base/View';
-import {ensureElement} from "../../utils/utils";
+import {View} from './base/View';
+import {ensureElement} from "../utils/utils";
 
 interface ISuccess {
     total: number;

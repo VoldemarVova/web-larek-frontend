@@ -1,5 +1,5 @@
 import {View} from './base/View';
-import {IEvents} from "./base/events";
+import {IEvents} from "./base/Events";
 import {ensureElement} from "../utils/utils";
 
 interface IPage {
@@ -37,10 +37,6 @@ export class Page extends View<IPage> {
     }
 
     set locked(value: boolean) {
-        if (value) {
-            this._wrapper.classList.add('page__wrapper_locked');
-        } else {
-            this._wrapper.classList.remove('page__wrapper_locked');
-        }
+        this.toggleClass(this._wrapper, 'page__wrapper_locked', value);
     }
 }

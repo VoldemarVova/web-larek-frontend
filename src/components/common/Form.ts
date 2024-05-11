@@ -1,5 +1,5 @@
 import {View} from "../base/View";
-import {IEvents} from "../base/events";
+import {IEvents} from "../base/Events";
 import {ensureElement} from "../../utils/utils";
 
 interface IFormState {
@@ -38,7 +38,7 @@ export class Form<T> extends View<IFormState> {
     }
 
     set valid(value: boolean) {
-        this._submit.disabled = !value;
+        this.setDisabled(this._submit, !value);
     }
 
     set errors(value: string) {
