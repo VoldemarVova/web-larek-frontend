@@ -2,6 +2,14 @@ import {View} from './base/View';
 import {ICard} from "../types";
 import {ensureElement} from "../utils/utils";
 
+const CategoryTypes: Record<string, string> = {
+    'софт-скил': 'soft',
+    'другое': 'other',
+    'дополнительное': 'additional',
+    'кнопка': 'button',
+    'хард-скил': 'hard',
+}
+
 interface ICardActions {
     onClick?: (event: MouseEvent) => void;
     onSend?: () => void;
@@ -76,6 +84,7 @@ export class Card extends View<ICard> {
 
     set category(value: string) {
         this.setText(this._category, value)
+        this._category.classList.add(`card__category_${CategoryTypes[value]}`)
     }
 
     set price(value: number | null) {
