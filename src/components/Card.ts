@@ -26,7 +26,7 @@ export class Card extends View<ICard> {
         this._price = ensureElement<HTMLSpanElement>(`.${blockName}__price`, container);
         this._image = container.querySelector(`.${blockName}__image`);
         this._button = container.querySelector(`.button`);
-        this._description = container.querySelector(`.${blockName}__description`);
+        this._description = container.querySelector(`.${blockName}__text`);
         this._category = container.querySelector(`.${blockName}__category`);
         this._index = container.querySelector('.basket__item-index');
         this._deleteButton = container.querySelector('.basket__item-delete')
